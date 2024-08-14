@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chant_social_task/config/extensions/context_extension.dart';
 
+import '../items/colors/app_colors.dart';
+
 class AppTheme {
   const AppTheme._();
   static ThemeData lightTheme(BuildContext context) {
     return ThemeData(
       brightness: Brightness.light,
-      primaryColor: Colors.blue,
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 0,
