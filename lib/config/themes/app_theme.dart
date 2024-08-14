@@ -77,15 +77,12 @@ class AppTheme {
           fontSize: context.dynamicHeight(0.017),
         ),
       ),
-      colorScheme:
-          ColorScheme.fromSwatch().copyWith(secondary: Colors.blueAccent),
     );
   }
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.blue,
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           elevation: 0,
@@ -154,7 +151,5 @@ class AppTheme {
             fontSize: context.dynamicHeight(0.017),
           ),
         ),
-        colorScheme:
-            ColorScheme.fromSwatch().copyWith(secondary: Colors.blueAccent),
       );
 }

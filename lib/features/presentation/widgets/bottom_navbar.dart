@@ -3,6 +3,7 @@ import 'package:flutter_chant_social_task/config/extensions/context_extension.da
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../../config/items/colors/app_colors.dart';
+import '../views/games.dart';
 import '../views/home.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -17,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   final List _children = <Widget>[
     const Home(),
-    Container(),
+    const Games(),
     Container(),
     Container(),
   ];
