@@ -3,6 +3,7 @@ import 'package:flutter_chant_social_task/config/extensions/context_extension.da
 import 'package:flutter_chant_social_task/config/items/colors/app_colors.dart';
 import 'package:flutter_chant_social_task/config/utility/enum/image_enum.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 
 import '../../../config/routes/route_names.dart';
 
@@ -15,6 +16,7 @@ class Onboarding extends StatefulWidget {
 
 class _OnboardingState extends State<Onboarding> {
   final TextEditingController _nameController = TextEditingController();
+  Box userSettings = Hive.box('userSettings');
 
   @override
   void dispose() {
@@ -101,6 +103,7 @@ class _OnboardingState extends State<Onboarding> {
                       ),
                       GestureDetector(
                         onTap: () {
+                          userSettings.put('name', _nameController.text);
                           Navigator.pushNamed(context, RouteNames.bottomNavBar);
                         },
                         child: Container(
