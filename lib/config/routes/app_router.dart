@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 
+import '../../features/presentation/views/home.dart';
 import 'route_names.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteNames.home:
-        return _materialRoute(Container());
+        return _materialRoute(const Home());
       case RouteNames.signIn:
         return _materialRoute(Container());
       case RouteNames.signUp:

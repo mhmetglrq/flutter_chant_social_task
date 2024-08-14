@@ -11,13 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: AppTheme.lightTheme(context),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
       initialRoute: RouteNames.home,
       onGenerateRoute: AppRouter.generateRoute,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
