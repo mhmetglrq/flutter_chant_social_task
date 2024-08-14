@@ -7,6 +7,7 @@ enum ImageEnum {
   play('play'),
   profilePicture('profile_picture'),
   arrow("arrow"),
+  buttonBg("button_bg"),
   ;
 
   final String value;
