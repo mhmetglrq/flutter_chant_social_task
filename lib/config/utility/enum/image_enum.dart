@@ -5,6 +5,8 @@ enum ImageEnum {
   ticTacToe('tic_tac_toe'),
   gameConsole('game_console'),
   play('play'),
+  profilePicture('profile_picture'),
+  arrow("arrow"),
   ;
 
   final String value;
