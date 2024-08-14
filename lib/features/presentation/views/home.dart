@@ -19,6 +19,7 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
+  //?TODO: Join game not include in the design
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +146,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             Text(
-                              "Create Game",
+                              "Game name",
                               style: context.textTheme.bodyMedium?.copyWith(
                                 color: AppColors.whiteColor,
                               ),

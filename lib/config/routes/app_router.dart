@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../features/presentation/views/home.dart';
+import '../../features/presentation/views/onboarding.dart';
 import 'route_names.dart';
 
 class AppRouter {
@@ -10,12 +11,8 @@ class AppRouter {
     switch (settings.name) {
       case RouteNames.home:
         return _materialRoute(const Home());
-      case RouteNames.signIn:
-        return _materialRoute(Container());
-      case RouteNames.signUp:
-        return _materialRoute(Container());
-      case RouteNames.forgotPassword:
-        return _materialRoute(Container());
+      case RouteNames.onboarding:
+        return _materialRoute(const Onboarding());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
