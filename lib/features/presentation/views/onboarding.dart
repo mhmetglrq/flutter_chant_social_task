@@ -101,7 +101,7 @@ class _OnboardingState extends State<Onboarding> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, RouteNames.home);
+                          Navigator.pushNamed(context, RouteNames.bottomNavBar);
                         },
                         child: Container(
                           decoration: BoxDecoration(
