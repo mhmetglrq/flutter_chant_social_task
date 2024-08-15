@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_chant_social_task/features/domain/entities/board_entity.dart';
 
 class BoardModel extends BoardEntity {
   const BoardModel({
     String? uid,
     String? name,
-    List<String>? participants,
+    List<dynamic>? participants,
     String? createdBy,
-    String? createdAt,
+    Timestamp? createdAt,
     String? status,
     String? color,
   }) : super(
