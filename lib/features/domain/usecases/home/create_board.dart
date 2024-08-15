@@ -2,15 +2,16 @@
 import 'package:flutter_chant_social_task/core/usecase/usecase.dart';
 import 'package:flutter_chant_social_task/features/domain/entities/board_entity.dart';
 
+import '../../../../core/resources/data_state.dart';
 import '../../repositories/home_repository.dart';
 
-class CreateBoard implements UseCase<String, CreateBoardParams> {
+class CreateBoard implements UseCase<DataState<String>, CreateBoardParams> {
   HomeRepository homeRepository;
   CreateBoard({
     required this.homeRepository,
   });
   @override
-  Future<String> call({CreateBoardParams? params}) {
+  Future<DataState<String>> call({CreateBoardParams? params}) {
     return homeRepository.createBoard(params!.boardEntity);
   }
 }
