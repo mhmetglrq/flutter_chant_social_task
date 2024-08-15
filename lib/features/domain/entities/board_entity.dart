@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class BoardEntity extends Equatable {
   final String? uid;
   final String? name;
-  final List<String>? participants;
+  final List<dynamic>? participants;
   final dynamic color;
   final String? createdBy;
-  final String? createdAt;
+  final Timestamp? createdAt;
   final String? status;
 
   const BoardEntity(this.uid, this.name, this.participants, this.createdBy,
