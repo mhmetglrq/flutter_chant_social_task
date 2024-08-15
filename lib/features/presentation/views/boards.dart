@@ -43,7 +43,7 @@ class Boards extends StatelessWidget {
                       stream: ref.watch(getBoardsProvider).call(),
                       builder: (context, snapshot) {
                         Box userSettings = Hive.box("userSettings");
-                        final currentUser = userSettings.get("name");
+                        var currentUser = userSettings.get("name");
 
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -57,6 +57,11 @@ class Boards extends StatelessWidget {
                           boards?.sort(
                               (a, b) => a.createdAt!.compareTo(b.createdAt!));
                           final sortedBoards = boards?.reversed.toList();
+                          if (boards == null || boards.isEmpty) {
+                            return const Center(
+                              child: Text("No games found"),
+                            );
+                          }
                           return ListView.builder(
                             itemCount: sortedBoards?.length ?? 0,
                             itemBuilder: (BuildContext context, int index) {
@@ -68,6 +73,12 @@ class Boards extends StatelessWidget {
                                   if (item.opponent == null &&
                                       item.opponent != currentUser &&
                                       item.status != "Finished") {
+                                    if ((currentUser == "" ||
+                                            currentUser == null ||
+                                            currentUser.isEmpty) &&
+                                        item.createdBy == "Unknown Player") {
+                                      currentUser = "Unknown Player 2";
+                                    }
                                     final updatedBoard = item.copyWith(
                                       opponent: currentUser,
                                     );

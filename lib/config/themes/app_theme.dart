@@ -84,10 +84,9 @@ class AppTheme {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
+          surfaceTintColor: AppColors.scaffoldBackgroundColor,
+          backgroundColor: AppColors.scaffoldBackgroundColor,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.white),
-          titleTextStyle: TextStyle(color: Colors.white),
         ),
         textTheme: TextTheme(
           displayLarge: TextStyle(

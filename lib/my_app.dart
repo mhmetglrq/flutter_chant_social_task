@@ -21,9 +21,10 @@ class _MyAppState extends State<MyApp> {
     log("userSettings: ${userSettings.get("name")}");
     return MaterialApp(
       theme: AppTheme.darkTheme(context),
-      initialRoute: userSettings.get("name") != null
-          ? RouteNames.bottomNavBar
-          : RouteNames.onboarding,
+      initialRoute:
+          (userSettings.get("name") != null && userSettings.get("name") != "")
+              ? RouteNames.bottomNavBar
+              : RouteNames.onboarding,
       onGenerateRoute: AppRouter.generateRoute,
       debugShowCheckedModeBanner: false,
     );
