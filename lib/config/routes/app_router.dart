@@ -1,6 +1,7 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
+import 'package:flutter_chant_social_task/features/presentation/views/board.dart';
 import 'package:flutter_chant_social_task/features/presentation/widgets/bottom_navbar.dart';
 
 import '../../features/presentation/views/home.dart';
@@ -16,6 +17,12 @@ class AppRouter {
         return _materialRoute(const Onboarding());
       case RouteNames.bottomNavBar:
         return _materialRoute(const BottomNavBar());
+      case RouteNames.board:
+        final args = settings.arguments as Map<String, dynamic>;
+        final boardUid = args['boardUid'];
+        return _materialRoute(Board(
+          boardUid: boardUid,
+        ));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
