@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_chant_social_task/config/extensions/context_extension.dart';
+import 'package:flutter_chant_social_task/core/resources/data_state.dart';
 import 'package:flutter_chant_social_task/features/domain/entities/board_entity.dart';
 import 'package:flutter_chant_social_task/features/presentation/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../config/items/colors/app_colors.dart';
 import '../../data/models/board_model.dart';
+import '../../domain/usecases/board/update_board.dart';
 import '../widgets/board_card.dart';
 
 class Boards extends StatelessWidget {
@@ -37,6 +42,9 @@ class Boards extends StatelessWidget {
                     child: StreamBuilder<List<BoardEntity>>(
                       stream: ref.watch(getBoardsProvider).call(),
                       builder: (context, snapshot) {
+                        Box userSettings = Hive.box("userSettings");
+                        final currentUser = userSettings.get("name");
+
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return const Center(
@@ -45,17 +53,41 @@ class Boards extends StatelessWidget {
                         }
                         if (snapshot.hasData) {
                           final boards = snapshot.data;
-                          final List<BoardModel>? boardModels = boards
-                              ?.map((e) => BoardModel.fromEntity(e))
-                              .toList();
-                          boardModels?.sort(
+
+                          boards?.sort(
                               (a, b) => a.createdAt!.compareTo(b.createdAt!));
-                          final sortedBoards = boardModels?.reversed.toList();
+                          final sortedBoards = boards?.reversed.toList();
                           return ListView.builder(
                             itemCount: sortedBoards?.length ?? 0,
                             itemBuilder: (BuildContext context, int index) {
-                              final item = sortedBoards?[index];
-                              return BoardCard(item: item);
+                              final item =
+                                  BoardModel.fromEntity(sortedBoards![index]);
+                              return BoardCard(
+                                item: item,
+                                onTap: () async {
+                                  if (item.opponent == null &&
+                                      item.opponent != currentUser &&
+                                      item.status != "Finished") {
+                                    final updatedBoard = item.copyWith(
+                                      opponent: currentUser,
+                                    );
+
+                                    final dataState = await ref
+                                        .watch(updateBoardProvider)
+                                        .call(
+                                          params: UpdateBoardParams(
+                                            board: updatedBoard,
+                                          ),
+                                        );
+                                    if (dataState is DataSuccess) {
+                                      Navigator.pushNamed(context, "/board",
+                                          arguments: {
+                                            "boardUid": item.uid,
+                                          });
+                                    }
+                                  }
+                                },
+                              );
                             },
                           );
                         } else {
