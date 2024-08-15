@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chant_social_task/config/extensions/context_extension.dart';
@@ -211,7 +212,7 @@ class _HomeState extends State<Home> {
                             BoardModel board = BoardModel(
                               name: _codeController.text,
                               color: testingColorString,
-                              createdAt: DateTime.now().toString(),
+                              createdAt: Timestamp.fromDate(DateTime.now()),
                               createdBy: userSettings.get("name"),
                               participants: [
                                 userSettings.get("name"),
@@ -222,11 +223,10 @@ class _HomeState extends State<Home> {
                             CreateBoardParams params = CreateBoardParams(
                               boardEntity: board,
                             );
-                            final result = await ref
-                                .read(createBoardRepositoryProvider)
-                                .call(
-                                  params: params,
-                                );
+                            final result =
+                                await ref.read(createBoardProvider).call(
+                                      params: params,
+                                    );
                             log("Result: $result");
                           },
                           shape: RoundedRectangleBorder(
