@@ -73,7 +73,7 @@ class _OnboardingState extends State<Onboarding> {
                     child: TextFormField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        hintText: "Enter game code",
+                        hintText: "Your name",
                         hintStyle: context.textTheme.bodySmall?.copyWith(
                           color: AppColors.hintColor,
                         ),

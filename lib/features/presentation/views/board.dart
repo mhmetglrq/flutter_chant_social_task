@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_chant_social_task/config/extensions/context_extension.dart';
+import 'package:flutter_chant_social_task/config/items/colors/app_colors.dart';
 import 'package:flutter_chant_social_task/config/routes/route_names.dart';
 import 'package:flutter_chant_social_task/config/utility/enum/image_enum.dart';
 import 'package:flutter_chant_social_task/features/data/models/board_model.dart';
@@ -30,7 +31,10 @@ class _BoardState extends State<Board> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final currentUser = userSettings.get("name");
+        var currentUser = userSettings.get("name");
+        if (currentUser == "" || currentUser == null || currentUser.isEmpty) {
+          currentUser = "Unknown Player";
+        }
         return StreamBuilder<BoardEntity>(
           stream: ref
               .watch(getBoardProvider)
@@ -84,7 +88,9 @@ class _BoardState extends State<Board> {
                   }
                 },
                 child: Scaffold(
-                  appBar: AppBar(),
+                  appBar: AppBar(
+                    backgroundColor: AppColors.scaffoldBackgroundColor,
+                  ),
                   body: SafeArea(
                     child: Padding(
                       padding: context.paddingAllDefault,
@@ -251,8 +257,11 @@ class _BoardState extends State<Board> {
                 ),
               );
             }
-            return const Center(
-              child: Text("Error"),
+            return Scaffold(
+              appBar: AppBar(),
+              body: const Center(
+                child: Text("Other user quit the game!"),
+              ),
             );
           },
         );
