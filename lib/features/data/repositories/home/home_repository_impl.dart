@@ -1,6 +1,7 @@
 import 'package:flutter_chant_social_task/features/data/models/board_model.dart';
 import 'package:flutter_chant_social_task/features/domain/entities/board_entity.dart';
 
+import '../../../../core/resources/data_state.dart';
 import '../../../domain/repositories/home_repository.dart';
 import '../../data_sources/cloud/firebase_service.dart';
 
@@ -10,7 +11,7 @@ class HomeRepositoryImpl implements HomeRepository {
   HomeRepositoryImpl({required this.firebaseService});
 
   @override
-  Future<String> createBoard(BoardEntity board) {
+  Future<DataState<String>> createBoard(BoardEntity board) {
     BoardModel boardModel = BoardModel.fromEntity(board);
     return firebaseService.createBoard(boardModel);
   }

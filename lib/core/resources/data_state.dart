@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
+
 abstract class DataState<T> {
   final T? data;
-  final String? exception;
+  final FirebaseException? exception;
 
   const DataState({this.data, this.exception});
 }
@@ -10,5 +12,5 @@ class DataSuccess<T> extends DataState<T> {
 }
 
 class DataFailed<T> extends DataState<T> {
-  const DataFailed(String exception) : super(exception: exception);
+  const DataFailed(FirebaseException exception) : super(exception: exception);
 }

@@ -8,6 +8,8 @@ enum ImageEnum {
   profilePicture('profile_picture'),
   arrow("arrow"),
   buttonBg("button_bg"),
+  firstPlayer("first_player"),
+  secondPlayer("second_player"),
   ;
 
   final String value;

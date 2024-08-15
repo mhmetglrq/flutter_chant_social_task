@@ -19,8 +19,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List _children = <Widget>[
     const Home(),
     const Boards(),
-    Container(),
-    Container(),
   ];
 
   @override
@@ -54,29 +52,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
             selectedColor: AppColors.selectedBackgroundColor.withOpacity(0.6),
           ),
           SalomonBottomBarItem(
-            icon: const Icon(Icons.home, color: AppColors.whiteColor),
+            icon:
+                const Icon(Icons.gamepad_rounded, color: AppColors.whiteColor),
             title: Text(
-              "Home",
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: AppColors.selectedColor,
-              ),
-            ),
-            selectedColor: AppColors.selectedBackgroundColor.withOpacity(0.6),
-          ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.home, color: AppColors.whiteColor),
-            title: Text(
-              "Home",
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: AppColors.selectedColor,
-              ),
-            ),
-            selectedColor: AppColors.selectedBackgroundColor.withOpacity(0.6),
-          ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.home, color: AppColors.whiteColor),
-            title: Text(
-              "Home",
+              "Boards",
               style: context.textTheme.bodyMedium?.copyWith(
                 color: AppColors.selectedColor,
               ),

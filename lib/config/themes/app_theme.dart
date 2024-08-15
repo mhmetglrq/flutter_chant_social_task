@@ -10,7 +10,7 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.white,
+        surfaceTintColor: AppColors.scaffoldBackgroundColor,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
         titleTextStyle: TextStyle(color: Colors.black),
