@@ -5,7 +5,9 @@ import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chant_social_task/config/extensions/context_extension.dart';
 import 'package:flutter_chant_social_task/config/items/colors/app_colors.dart';
+import 'package:flutter_chant_social_task/config/routes/route_names.dart';
 import 'package:flutter_chant_social_task/config/utility/enum/image_enum.dart';
+import 'package:flutter_chant_social_task/core/resources/data_state.dart';
 import 'package:flutter_chant_social_task/features/data/models/board_model.dart';
 import 'package:flutter_chant_social_task/features/domain/usecases/home/create_board.dart';
 import 'package:flutter_chant_social_task/features/presentation/providers/providers.dart';
@@ -209,25 +211,44 @@ class _HomeState extends State<Home> {
                             String testingColorString =
                                 testingColorValue.toString();
 
+                            final currentUser = userSettings.get("name");
+
                             BoardModel board = BoardModel(
                               name: _codeController.text,
                               color: testingColorString,
                               createdAt: Timestamp.fromDate(DateTime.now()),
-                              createdBy: userSettings.get("name"),
-                              participants: [
-                                userSettings.get("name"),
+                              createdBy: currentUser,
+                              moves: const [
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
                               ],
-                              status: "active",
+                              status: "Waiting",
                               uid: uid,
+                              currentTurn: currentUser,
                             );
                             CreateBoardParams params = CreateBoardParams(
                               boardEntity: board,
                             );
-                            final result =
+                            final dataState =
                                 await ref.read(createBoardProvider).call(
                                       params: params,
                                     );
-                            log("Result: $result");
+                            if (dataState is DataSuccess) {
+                              _codeController.clear();
+                              Navigator.pushNamed(context, RouteNames.board,
+                                  arguments: {
+                                    "boardUid": uid,
+                                  });
+                            } else {
+                              log(dataState.data.toString());
+                            }
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
