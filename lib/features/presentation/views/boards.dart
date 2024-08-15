@@ -62,45 +62,53 @@ class Boards extends StatelessWidget {
                               child: Text("No games found"),
                             );
                           }
-                          return ListView.builder(
-                            itemCount: sortedBoards?.length ?? 0,
-                            itemBuilder: (BuildContext context, int index) {
-                              final item =
-                                  BoardModel.fromEntity(sortedBoards![index]);
-                              return BoardCard(
-                                item: item,
-                                onTap: () async {
-                                  if (item.opponent == null &&
-                                      item.opponent != currentUser &&
-                                      item.status != "Finished") {
-                                    if ((currentUser == "" ||
-                                            currentUser == null ||
-                                            currentUser.isEmpty) &&
-                                        item.createdBy == "Unknown Player") {
-                                      currentUser = "Unknown Player 2";
-                                    }
-                                    final updatedBoard = item.copyWith(
-                                      opponent: currentUser,
-                                    );
+                          if (currentUser == null ||
+                              currentUser.isEmpty ||
+                              currentUser == "") {
+                            return const Center(
+                              child: Text("Please enter your name!"),
+                            );
+                          } else {
+                            return ListView.builder(
+                              itemCount: sortedBoards?.length ?? 0,
+                              itemBuilder: (BuildContext context, int index) {
+                                final item =
+                                    BoardModel.fromEntity(sortedBoards![index]);
+                                return BoardCard(
+                                  item: item,
+                                  onTap: () async {
+                                    if (item.opponent == null &&
+                                        item.opponent != currentUser &&
+                                        item.status != "Finished") {
+                                      if ((currentUser == "" ||
+                                              currentUser == null ||
+                                              currentUser.isEmpty) &&
+                                          item.createdBy == "Unknown Player") {
+                                        currentUser = "Unknown Player 2";
+                                      }
+                                      final updatedBoard = item.copyWith(
+                                        opponent: currentUser,
+                                      );
 
-                                    final dataState = await ref
-                                        .watch(updateBoardProvider)
-                                        .call(
-                                          params: UpdateBoardParams(
-                                            board: updatedBoard,
-                                          ),
-                                        );
-                                    if (dataState is DataSuccess) {
-                                      Navigator.pushNamed(context, "/board",
-                                          arguments: {
-                                            "boardUid": item.uid,
-                                          });
+                                      final dataState = await ref
+                                          .watch(updateBoardProvider)
+                                          .call(
+                                            params: UpdateBoardParams(
+                                              board: updatedBoard,
+                                            ),
+                                          );
+                                      if (dataState is DataSuccess) {
+                                        Navigator.pushNamed(context, "/board",
+                                            arguments: {
+                                              "boardUid": item.uid,
+                                            });
+                                      }
                                     }
-                                  }
-                                },
-                              );
-                            },
-                          );
+                                  },
+                                );
+                              },
+                            );
+                          }
                         } else {
                           return Center(
                             child: Text(snapshot.error.toString()),
